@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Cyclist Form</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body style="background-color: #a6eeff;">
+	<div class="bg-dark navbar navbar-static-top navbar-header">
+		<div class="float-left">
+			<a class="btn btn-secondary" th:href="@{/login?logout}">Logout</a>
+		</div>
+	</div>
+    <div class="row" style="text-align: center">
+        <div class="col-md-4 mx-auto" style="display: inline-block">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0">Add cyclist</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form" action="#" th:action="@{/addCyclist}" th:object="${cyclist}" enctype="multipart/form-data" method="post">
+                        <input type="hidden" name="id" th:field="*{id}">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" th:value="${name}" th:field="*{name}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="dorsal">Dorsal</label>
+                            <input type="number" name="dorsal" id="dorsal" th:value="${dorsal}" th:field="*{dorsal}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" name="age" id="age" th:value="${age}" th:field="*{age}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="cyclistPic">Picture</label>
+                            <input type="file" name="cyclistPic" id="cyclistPic" class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="teamname">Team name</label>
+                            <select required class="form-control form-control-lg rounded-0" name="teamname">
+                            	<option th:each="team : ${teams}" th:value="${team.teamname}" th:text="${team.teamname}">
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success float-right" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

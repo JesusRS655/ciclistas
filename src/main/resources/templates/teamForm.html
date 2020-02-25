@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Team Form</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body style="background-color: #a6eeff;">
+	<div class="bg-dark navbar navbar-static-top navbar-header">
+		<div class="float-left">
+			<a class="btn btn-secondary" th:href="@{/login?logout}">Logout</a>
+		</div>
+	</div>
+	<div class="row" style="text-align: center">
+        <div class="col-md-4 mx-auto" style="display: inline-block">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0">Add team</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form" action="#" th:action="@{/addTeam}" th:object="${team}" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <label for="teamname">Team name</label>
+                            <input type="text" name="teamname" id="teamname" th:value="${teamname}" th:field="*{teamname}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="director">Director name</label>
+                            <input type="text" name="director" id="director" th:value="${director}" th:field="*{director}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="teamPic">Picture</label>
+                            <input type="file" name="teamPic" id="teamPic" class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success float-right" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

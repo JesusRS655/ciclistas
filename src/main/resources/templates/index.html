@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Index page</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+		@keyframes tickerv {
+			0% {
+				margin-top: 0;
+			}
+
+			25% {
+				margin-top: -26px;
+			}
+
+			50% {
+				margin-top: -52px;
+			}
+
+			75% {
+				margin-top: -78px;
+			}
+
+			100% {
+				margin-top: 0;
+			}
+		}
+
+		.tickerv-wrap {
+			background: #eee;
+			box-sizing: content-box;
+			height: 25px;
+			overflow: hidden;
+			padding: 10px;
+		}
+
+		.tickerv-wrap ul {
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+			animation-name: tickerv;
+			animation-duration: 10s;
+			animation-iteration-count: infinite;
+			animation-timing-function: cubic-bezier(1, 0, .5, 0);
+		}
+
+		.tickerv-wrap ul:hover {
+			animation-play-state: paused;
+		}
+
+		.tickerv-wrap ul li {
+			font-size: 18px;
+			line-height: 26px
+		}
+	</style>
+</head>
+
+<body style="background-color: #a6eeff">
+	<div class="bg-dark navbar navbar-static-top navbar-header">
+		<a class="btn btn-secondary float-right" th:href="@{/login?logout}">Logout</a>
+		<div class="float-right">
+			<a class="btn btn-info m-2" th:href="@{/cyclist}" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TEAM') or hasRole('ROLE_CYCLIST')">Cyclists</a>
+			<a class="btn btn-info m-2" th:href="@{/maillot}" sec:authorize="hasRole('ROLE_ADMIN')">Maillots</a>
+			<a class="btn btn-info m-2" th:href="@{/port}" sec:authorize="hasRole('ROLE_ADMIN')">Ports</a>
+			<a class="btn btn-info m-2" th:href="@{/stage}" sec:authorize="hasRole('ROLE_ADMIN')">Stages</a>
+			<a class="btn btn-info m-2" th:href="@{/team}" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TEAM')">Teams</a>
+		</div>
+	</div>
+	<label for="news">-- NEWS --</label>
+	<div id="news" class="tickerv-wrap m-5" style="border-radius: 20px;">
+	    <ul>
+	      <li th:each="n : ${news}" th:text="${n.headline}"></li>
+	    </ul>
+ 	</div>
+	<div class="text-center p-5">
+		<h2>Welcome, <span th:text="${username}"></span></h2>
+	</div>
+</body>
+
+</html>

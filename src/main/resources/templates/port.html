@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ports</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	
+</head>
+<body style="background-color: #a6eeff">
+	<div class="bg-dark navbar navbar-static-top navbar-header">
+		<div class="float-left">
+			<a class="btn btn-secondary" th:href="@{/login?logout}">Logout</a>
+			<a class="btn btn-info m-2" th:href="@{/index}">Index</a>
+		</div>
+		<div class="float-right">
+			<a class="btn btn-info m-2" th:href="@{/cyclist}" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TEAM') or hasRole('ROLE_CYCLIST')">Cyclists</a>
+			<a class="btn btn-info m-2" th:href="@{/maillot}" sec:authorize="hasRole('ROLE_ADMIN')">Maillots</a>
+			<a class="btn btn-info m-2" th:href="@{/stage}" sec:authorize="hasRole('ROLE_ADMIN')">Stages</a>
+			<a class="btn btn-info m-2" th:href="@{/team}" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TEAM')">Teams</a>
+		</div>
+	</div>
+	<div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Ports</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a th:href="@{/portForm?portname=''}" class="btn btn-success float-right m-3" sec:authorize="hasRole('ROLE_ADMIN')">Add</a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                    	<th>Port Name</th>
+                    	<th>Category</th>
+                    	<th>Height</th>
+                    	<th>Slope</th>
+                    	<th colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="port : ${ports}">
+                        <td><span th:text="${port.portname}"></span></td>
+                        <td><span th:text="${port.category}"></span></td>
+                        <td><span th:text="${port.height}"></span></td>
+                        <td><span th:text="${port.slope}"></span></td>
+                        <td>
+                            <a th:href="@{/portForm(portname=${port.portname})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-warning m-1 text-white font-weight-normal">Edit</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/deletePort(portname=${port.portname})}" sec:authorize="hasRole('ROLE_ADMIN')" method="post">
+                                <input class="btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete?');"/>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

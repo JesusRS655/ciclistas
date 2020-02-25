@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Port Form</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body style="background-color: #a6eeff;">
+	<div class="bg-dark navbar navbar-static-top navbar-header">
+		<div class="float-left">
+			<a class="btn btn-secondary" th:href="@{/login?logout}">Logout</a>
+		</div>
+	</div>
+	<div class="row" style="text-align: center">
+        <div class="col-md-4 mx-auto" style="display: inline-block">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0">Add port</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form" action="#" th:action="@{/addPort}" th:object="${port}" method="post">
+                        <div class="form-group">
+                            <label for="portname">Port Name</label>
+                            <input type="text" name="portname" id="portname" th:value="${portname}" th:field="*{portname}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height</label>
+                            <input type="number" step="0.01" name="height" id="height" th:value="${height}" th:field="*{height}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="slope">Slope</label>
+                            <input type="number" step="0.01" name="slope" id="slope" th:value="${slope}" th:field="*{slope}" required class="form-control form-control-lg rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select required class="form-control form-control-lg rounded-0" id="category" name="category">
+                            	<option value="A" th:value="A" selected>A</option>
+                            	<option value="B" th:value="B">B</option>
+                            	<option value="C" th:value="C">C</option>
+                            </select>
+						</div>
+                        <div class="form-group">
+                            <label for="cyclist">Winner</label>
+                            <select required class="form-control form-control-lg rounded-0">
+                            	<option th:each="cyclist : ${cyclists}" th:value="${cyclist.name}" th:text="${cyclist.name}">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teamname">Stage</label>
+                            <select required class="form-control form-control-lg rounded-0">
+                            	<option th:each="stage : ${stages}" th:value="${stage.stagenumber}" th:text="${stage.stagenumber}">
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success float-right" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
