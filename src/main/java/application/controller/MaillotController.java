@@ -64,4 +64,11 @@ public class MaillotController {
 		return mav;
 	}
 
+	@PostMapping("/deleteMaillot")
+	public String deleteMaillot(@RequestParam(name = "code") String code) {
+		LOG.info("Removing maillot");
+		maillotService.removeMaillot(code);
+		return "redirect:/maillot";
+	}
+
 }

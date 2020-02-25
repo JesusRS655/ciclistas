@@ -6,8 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +101,12 @@ public class CyclistController {
 
 		mav.setViewName("redirect:/cyclist");
 		return mav;
+	}
+
+	@PostMapping("/deleteCyclist")
+	public String deleteCyclist(@RequestParam(name = "id") int id) {
+		LOG.info("Removing cyclist");
+		cyclistService.removeCyclist(id);
+		return "redirect:/cyclist";
 	}
 }

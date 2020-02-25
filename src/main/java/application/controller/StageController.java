@@ -66,4 +66,11 @@ public class StageController {
 		return mav;
 	}
 
+	@PostMapping("/deleteStage")
+	public String deleteStage(@RequestParam(name = "stagenumber") int stagenumber) {
+		LOG.info("Removing maillot");
+		stageService.removeStage(stagenumber);
+		return "redirect:/stage";
+	}
+
 }

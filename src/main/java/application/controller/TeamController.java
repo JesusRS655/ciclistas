@@ -6,8 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +81,13 @@ public class TeamController {
 
 		mav.setViewName("redirect:/team");
 		return mav;
+	}
+
+	@PostMapping("/deleteTeam")
+	public String deleteTeam(@RequestParam(name = "teamname") String teamname) {
+		LOG.info("Removing team");
+		teamService.removeTeam(teamname);
+		return "redirect:/team";
 	}
 
 }

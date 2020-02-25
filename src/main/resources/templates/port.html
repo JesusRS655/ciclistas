@@ -52,7 +52,7 @@
                             <a th:href="@{/portForm(portname=${port.portname})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-warning m-1 text-white font-weight-normal">Edit</a>
                         </td>
                         <td>
-                            <form th:action="@{/deletePort(portname=${port.portname})}" sec:authorize="hasRole('ROLE_ADMIN')" method="post">
+                            <form th:action="@{/removePort(portname=${port.portname})}" sec:authorize="hasRole('ROLE_ADMIN')" method="post">
                                 <input class="btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete?');"/>
                             </form>
                         </td>
